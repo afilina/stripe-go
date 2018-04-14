@@ -49,7 +49,7 @@ func TestSubscriptionNew_WithItems(t *testing.T) {
 		Customer: stripe.String("cus_123"),
 		Items: []*stripe.SubscriptionItemsParams{
 			{
-				Plan:     "gold",
+				Plan:     stripe.String("gold"),
 				Quantity: stripe.Int64(0),
 			},
 		},
