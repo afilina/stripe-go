@@ -7,6 +7,11 @@ import (
 	"github.com/stripe/stripe-go/form"
 )
 
+const (
+	AccountHolderTypeCompany    string = "company"
+	AccountHolderTypeIndividual string = "individual"
+)
+
 // BankAccountStatus is the list of allowed values for the bank account's status.
 // Allowed values are "new", "validated", "verified", "verification_failed", "errored".
 type BankAccountStatus string
