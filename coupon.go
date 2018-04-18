@@ -2,9 +2,11 @@ package stripe
 
 import "encoding/json"
 
-// CouponDuration is the list of allowed values for the coupon's duration.
-// Allowed values are "forever", "once", "repeating".
-type CouponDuration string
+const (
+	CouponDurationForever   string = "forever"
+	CouponDurationOnce      string = "once"
+	CouponDurationRepeating string = "repeating"
+)
 
 // CouponParams is the set of parameters that can be used when creating a coupon.
 // For more details see https://stripe.com/docs/api#create_coupon.
@@ -35,7 +37,7 @@ type Coupon struct {
 	Created          int64             `json:"created"`
 	Currency         Currency          `json:"currency"`
 	Deleted          bool              `json:"deleted"`
-	Duration         CouponDuration    `json:"duration"`
+	Duration         string            `json:"duration"`
 	DurationInMonths int64             `json:"duration_in_months"`
 	ID               string            `json:"id"`
 	Livemode         bool              `json:"livemode"`

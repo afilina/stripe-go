@@ -2,14 +2,16 @@ package stripe
 
 import "encoding/json"
 
-// RefundReason is, if set, the reason the refund is being made--allowed values
-// are "fraudulent", "duplicate", and "requested_by_customer".
-type RefundReason string
+const (
+	RefundReasonDuplicate           string = "duplicate"
+	RefundReasonFraudulent          string = "fraudulent"
+	RefundReasonRequestedByCustomer string = "requested_by_customer"
 
-// RefundStatus is the status of the refund.
-// For credit card refunds, this will always be "succeeded".
-// For other types of refunds, it can be "pending", "succeeded", "failed", or "cancelled".
-type RefundStatus string
+	RefundStatusCanceled  string = "canceled"
+	RefundStatusFailed    string = "failed"
+	RefundStatusPending   string = "pending"
+	RefundStatusSucceeded string = "succeeded"
+)
 
 // RefundParams is the set of parameters that can be used when refunding a charge.
 // For more details see https://stripe.com/docs/api#refund.
@@ -38,9 +40,9 @@ type Refund struct {
 	Currency           Currency            `json:"currency"`
 	ID                 string              `json:"id"`
 	Metadata           map[string]string   `json:"metadata"`
-	Reason             RefundReason        `json:"reason"`
+	Reason             string              `json:"reason"`
 	ReceiptNumber      string              `json:"receipt_number"`
-	Status             RefundStatus        `json:"status"`
+	Status             string              `json:"status"`
 }
 
 // RefundList is a list object for refunds.

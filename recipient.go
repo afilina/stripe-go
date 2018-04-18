@@ -6,9 +6,10 @@ import (
 	"github.com/stripe/stripe-go/form"
 )
 
-// RecipientType is the list of allowed values for the recipient's type.
-// Allowed values are "individual", "corporation".
-type RecipientType string
+const (
+	RecipientTypeIndividual string = "individual"
+	RecipientTypeCorp       string = "corporation"
+)
 
 // RecipientParams is the set of parameters that can be used when creating or updating recipients.
 // For more details see https://stripe.com/docs/api#create_recipient and https://stripe.com/docs/api#update_recipient.
@@ -61,7 +62,7 @@ type Recipient struct {
 	Metadata      map[string]string `json:"metadata"`
 	MigratedTo    *Account          `json:"migrated_to"`
 	Name          string            `json:"name"`
-	Type          RecipientType     `json:"type"`
+	Type          string            `json:"type"`
 }
 
 // RecipientList is a list of recipients as retrieved from a list endpoint.

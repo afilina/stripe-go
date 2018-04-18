@@ -372,14 +372,14 @@ func (s *BackendConfiguration) ResponseToError(res *http.Response, resBody []byt
 	root := e.(map[string]interface{})
 
 	stripeErr := &Error{
-		Type:           ErrorType(root["type"].(string)),
+		Type:           string(root["type"].(string)),
 		Msg:            root["message"].(string),
 		HTTPStatusCode: res.StatusCode,
 		RequestID:      res.Header.Get("Request-Id"),
 	}
 
 	if code, ok := root["code"]; ok {
-		stripeErr.Code = ErrorCode(code.(string))
+		stripeErr.Code = string(code.(string))
 	}
 
 	if param, ok := root["param"]; ok {

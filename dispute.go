@@ -4,17 +4,25 @@ import (
 	"encoding/json"
 )
 
-// DisputeReason is the list of allowed values for a discount's reason.
-// Allowed values are "duplicate", "fraudulent", "subscription_canceled",
-// "product_unacceptable", "product_not_received", "unrecognized",
-// "credit_not_processed", "general".
-type DisputeReason string
+const (
+	DisputeReasonCreditNotProcessed   string = "credit_not_processed"
+	DisputeReasonDuplicate            string = "duplicate"
+	DisputeReasonFraudulent           string = "fraudulent"
+	DisputeReasonGeneral              string = "general"
+	DisputeReasonProductNotReceived   string = "product_not_received"
+	DisputeReasonProductUnacceptable  string = "product_unacceptable"
+	DisputeReasonSubscriptionCanceled string = "subscription_canceled"
+	DisputeReasonUnrecognized         string = "unrecognized"
 
-// DisputeStatus is the list of allowed values for a discount's status.
-// Allowed values are "won", "lost", "needs_response", "under_review",
-// "warning_needs_response", "warning_under_review", "charge_refunded",
-// "warning_closed".
-type DisputeStatus string
+	DisputeStatusChargeRefunded       string = "charge_refunded"
+	DisputeStatusLost                 string = "lost"
+	DisputeStatusNeedsResponse        string = "needs_response"
+	DisputeStatusUnderReview          string = "under_review"
+	DisputeStatusWarningClosed        string = "warning_closed"
+	DisputeStatusWarningNeedsResponse string = "warning_needs_response"
+	DisputeStatusWarningUnderReview   string = "warning_under_review"
+	DisputeStatusWon                  string = "won"
+)
 
 // DisputeParams is the set of parameters that can be used when updating a dispute.
 // For more details see https://stripe.com/docs/api#update_dispute.
@@ -78,8 +86,8 @@ type Dispute struct {
 	IsChargeRefundable  bool                  `json:"is_charge_refundable"`
 	Livemode            bool                  `json:"livemode"`
 	Metadata            map[string]string     `json:"metadata"`
-	Reason              DisputeReason         `json:"reason"`
-	Status              DisputeStatus         `json:"status"`
+	Reason              string                `json:"reason"`
+	Status              string                `json:"status"`
 }
 
 // DisputeList is a list of disputes as retrieved from a list endpoint.

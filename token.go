@@ -1,8 +1,10 @@
 package stripe
 
-// TokenType is the list of allowed values for a token's type.
-// Allowed values are "card", "bank_account".
-type TokenType string
+const (
+	TokenTypeCard        string = "card"
+	TokenTypeBankAccount string = "bank_account"
+	TokenTypePII         string = "pii"
+)
 
 // TokenParams is the set of parameters that can be used when creating a token.
 // For more details see https://stripe.com/docs/api#create_card_token and https://stripe.com/docs/api#create_bank_account_token.
@@ -31,10 +33,10 @@ type Token struct {
 	// with Stripe Checkout.
 	Email string `json:"email"`
 
-	ID       string    `json:"id"`
-	Livemode bool      `json:"livemode"`
-	Type     TokenType `json:"type"`
-	Used     bool      `json:"used"`
+	ID       string `json:"id"`
+	Livemode bool   `json:"livemode"`
+	Type     string `json:"type"`
+	Used     bool   `json:"used"`
 }
 
 // PIIParams are parameters for personal identifiable information (PII).

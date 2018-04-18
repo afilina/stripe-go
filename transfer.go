@@ -2,9 +2,12 @@ package stripe
 
 import "encoding/json"
 
-// TransferSourceType is the list of allowed values for the transfer's source_type field.
-// Allowed values are "alipay_account", bank_account", "bitcoin_receiver", "card".
-type TransferSourceType string
+const (
+	TransferSourceTypeAlipayAccount   string = "alipay_account"
+	TransferSourceTypeBankAccount     string = "bank_account"
+	TransferSourceTypeBitcoinReceiver string = "bitcoin_receiver"
+	TransferSourceTypeCard            string = "card"
+)
 
 // TransferDestination describes the destination of a Transfer.
 // The Type should indicate which object is fleshed out
@@ -44,7 +47,7 @@ type Transfer struct {
 	BalanceTransaction *BalanceTransaction       `json:"balance_transaction"`
 	Created            int64                     `json:"created"`
 	Currency           Currency                  `json:"currency"`
-	Destination        TransferDestination       `json:"destination"`
+	Destination        string                    `json:"destination"`
 	DestinationPayment *Charge                   `json:"destination_payment"`
 	ID                 string                    `json:"id"`
 	Livemode           bool                      `json:"livemode"`

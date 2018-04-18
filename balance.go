@@ -2,58 +2,52 @@ package stripe
 
 import "encoding/json"
 
-// BalanceTransactionStatus is the list of allowed values for the balance transaction's status.
-// Allowed values are "available", "pending".
-type BalanceTransactionStatus string
-
-// BalanceTransactionType is the list of allowed values for the balance transaction's type.
-// Allowed values are "charge", "refund", "adjustment", "application_fee",
-// "application_fee_refund", "transfer", "transfer_cancel", "transfer_failure".
-type BalanceTransactionType string
-
-// BalanceTransactionSourceType consts represent valid balance transaction sources.
-type BalanceTransactionSourceType string
-
 const (
-	// BalanceTransactionSourceTypeCharge is a constant representing a transaction source of charge
-	BalanceTransactionSourceTypeCharge BalanceTransactionSourceType = "charge"
+	BalanceTransactionStatusAvailable string = "available"
+	BalanceTransactionStatusPending   string = "pending"
 
-	// BalanceTransactionSourceTypeDispute is a constant representing a transaction source of dispute
-	BalanceTransactionSourceTypeDispute BalanceTransactionSourceType = "dispute"
+	BalanceTransactionSourceTypeApplicationFee    string = "application_fee"
+	BalanceTransactionSourceTypeCharge            string = "charge"
+	BalanceTransactionSourceTypeDispute           string = "dispute"
+	BalanceTransactionSourceTypePayout            string = "payout"
+	BalanceTransactionSourceTypeRecipientTransfer string = "recipient_transfer"
+	BalanceTransactionSourceTypeRefund            string = "refund"
+	BalanceTransactionSourceTypeReversal          string = "reversal"
+	BalanceTransactionSourceTypeTransfer          string = "transfer"
 
-	// BalanceTransactionSourceTypeApplicationFee is a constant representing a transaction source of application_fee
-	BalanceTransactionSourceTypeApplicationFee BalanceTransactionSourceType = "application_fee"
-
-	// BalanceTransactionSourceTypePayout is a constant representing a transaction source of payout
-	BalanceTransactionSourceTypePayout BalanceTransactionSourceType = "payout"
-
-	// BalanceTransactionSourceTypeRecipientTransfer is a constant representing a transaction source of recipient_transfer
-	BalanceTransactionSourceTypeRecipientTransfer BalanceTransactionSourceType = "recipient_transfer"
-
-	// BalanceTransactionSourceTypeRefund is a constant representing a transaction source of refund
-	BalanceTransactionSourceTypeRefund BalanceTransactionSourceType = "refund"
-
-	// BalanceTransactionSourceTypeReversal is a constant representing a transaction source of reversal
-	BalanceTransactionSourceTypeReversal BalanceTransactionSourceType = "reversal"
-
-	// BalanceTransactionSourceTypeTransfer is a constant representing a transaction source of transfer
-	BalanceTransactionSourceTypeTransfer BalanceTransactionSourceType = "transfer"
+	BalanceTransactionTypeAdjustment               string = "adjustment"
+	BalanceTransactionTypeApplicationFee           string = "application_fee"
+	BalanceTransactionTypeApplicationFeeRefund     string = "application_fee_refund"
+	BalanceTransactionTypeCharge                   string = "charge"
+	BalanceTransactionTypePayment                  string = "payment"
+	BalanceTransactionTypePaymentFailureRefund     string = "payment_failure_refund"
+	BalanceTransactionTypePaymentRefund            string = "payment_refund"
+	BalanceTransactionTypePayout                   string = "payout"
+	BalanceTransactionTypePayoutCancel             string = "payout_cancel"
+	BalanceTransactionTypePayoutFailure            string = "payout_failure"
+	BalanceTransactionTypeRecipientTransfer        string = "recipient_transfer"
+	BalanceTransactionTypeRecipientTransferCancel  string = "recipient_transfer_cancel"
+	BalanceTransactionTypeRecipientTransferFailure string = "recipient_transfer_failure"
+	BalanceTransactionTypeRefund                   string = "refund"
+	BalanceTransactionTypeStripeFee                string = "stripe_fee"
+	BalanceTransactionTypeTransfer                 string = "transfer"
+	BalanceTransactionTypeTransferRefund           string = "transfer_refund"
 )
 
 // BalanceTransactionSource describes the source of a balance Transaction.
 // The Type should indicate which object is fleshed out.
 // For more details see https://stripe.com/docs/api#retrieve_balance_transaction
 type BalanceTransactionSource struct {
-	ApplicationFee    *ApplicationFee              `json:"-"`
-	Charge            *Charge                      `json:"-"`
-	Dispute           *Dispute                     `json:"-"`
-	ID                string                       `json:"id"`
-	Payout            *Payout                      `json:"-"`
-	RecipientTransfer *RecipientTransfer           `json:"-"`
-	Refund            *Refund                      `json:"-"`
-	Reversal          *Reversal                    `json:"-"`
-	Transfer          *Transfer                    `json:"-"`
-	Type              BalanceTransactionSourceType `json:"object"`
+	ApplicationFee    *ApplicationFee    `json:"-"`
+	Charge            *Charge            `json:"-"`
+	Dispute           *Dispute           `json:"-"`
+	ID                string             `json:"id"`
+	Payout            *Payout            `json:"-"`
+	RecipientTransfer *RecipientTransfer `json:"-"`
+	Refund            *Refund            `json:"-"`
+	Reversal          *Reversal          `json:"-"`
+	Transfer          *Transfer          `json:"-"`
+	Type              string             `json:"object"`
 }
 
 // BalanceParams is the set of parameters that can be used when retrieving a balance.
@@ -93,19 +87,19 @@ type Balance struct {
 // BalanceTransaction is the resource representing the balance transaction.
 // For more details see https://stripe.com/docs/api/#balance.
 type BalanceTransaction struct {
-	Amount      int64                    `json:"amount"`
-	AvailableOn int64                    `json:"available_on"`
-	Created     int64                    `json:"created"`
-	Currency    Currency                 `json:"currency"`
-	Description string                   `json:"description"`
-	ID          string                   `json:"id"`
-	Fee         int64                    `json:"fee"`
-	FeeDetails  []BalanceTransactionFee  `json:"fee_details"`
-	Net         int64                    `json:"net"`
-	Recipient   string                   `json:"recipient"`
-	Source      BalanceTransactionSource `json:"source"`
-	Status      BalanceTransactionStatus `json:"status"`
-	Type        BalanceTransactionType   `json:"type"`
+	Amount      int64                   `json:"amount"`
+	AvailableOn int64                   `json:"available_on"`
+	Created     int64                   `json:"created"`
+	Currency    Currency                `json:"currency"`
+	Description string                  `json:"description"`
+	ID          string                  `json:"id"`
+	Fee         int64                   `json:"fee"`
+	FeeDetails  []BalanceTransactionFee `json:"fee_details"`
+	Net         int64                   `json:"net"`
+	Recipient   string                  `json:"recipient"`
+	Source      string                  `json:"source"`
+	Status      string                  `json:"status"`
+	Type        string                  `json:"type"`
 }
 
 // BalanceTransactionList is a list of transactions as returned from a list endpoint.

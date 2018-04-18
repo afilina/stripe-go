@@ -1,8 +1,5 @@
 package stripe
 
-// Country is the list of supported countries
-type Country string
-
 // VerificationFieldsList lists the fields needed for an account verification.
 // For more details see https://stripe.com/docs/api#country_spec_object-verification_fields.
 type VerificationFieldsList struct {
@@ -15,7 +12,7 @@ type VerificationFieldsList struct {
 type CountrySpec struct {
 	DefaultCurrency                Currency                          `json:"default_currency"`
 	ID                             string                            `json:"id"`
-	SupportedBankAccountCurrencies map[Currency][]Country            `json:"supported_bank_account_currencies"`
+	SupportedBankAccountCurrencies map[Currency][]string             `json:"supported_bank_account_currencies"`
 	SupportedPaymentCurrencies     []Currency                        `json:"supported_payment_currencies"`
 	SupportedPaymentMethods        []string                          `json:"supported_payment_methods"`
 	VerificationFields             map[string]VerificationFieldsList `json:"verification_fields"`

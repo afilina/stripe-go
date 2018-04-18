@@ -6,17 +6,14 @@ import (
 	"github.com/stripe/stripe-go/form"
 )
 
-// PlanInterval is the list of allowed values for a plan's interval.
-// Allowed values are "day", "week", "month", "year".
-type PlanInterval string
-
 const (
-	// PlanBillingSchemeTiered indicates that the price per single unit is tiered
-	// and can change with the total number of units.
-	PlanBillingSchemeTiered string = "tiered"
-	// PlanBillingSchemePerUnit indicates that each unit is billed at a fixed
-	// price.
 	PlanBillingSchemePerUnit string = "per_unit"
+	PlanBillingSchemeTiered  string = "tiered"
+
+	PlanIntervalDay   string = "day"
+	PlanIntervalWeek  string = "week"
+	PlanIntervalMonth string = "month"
+	PlanIntervalYear  string = "year"
 )
 
 const (
@@ -46,7 +43,7 @@ type Plan struct {
 	Currency        Currency            `json:"currency"`
 	Deleted         bool                `json:"deleted"`
 	ID              string              `json:"id"`
-	Interval        PlanInterval        `json:"interval"`
+	Interval        string              `json:"interval"`
 	IntervalCount   int64               `json:"interval_count"`
 	Livemode        bool                `json:"livemode"`
 	Metadata        map[string]string   `json:"metadata"`

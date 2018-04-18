@@ -7,6 +7,11 @@ import (
 	"path/filepath"
 )
 
+const (
+	FileUploadPurposeDisputeEvidence  string = "dispute_evidence"
+	FileUploadPurposeIdentityDocument string = "identity_document"
+)
+
 // FileUploadParams is the set of parameters that can be used when creating a
 // file upload.
 // For more details see https://stripe.com/docs/api#create_file_upload.
@@ -31,19 +36,15 @@ type FileUploadListParams struct {
 	Purpose      *string           `form:"purpose"`
 }
 
-// FileUploadPurpose is the purpose of a particular file upload. Allowed values
-// are "dispute_evidence" and "identity_document".
-type FileUploadPurpose string
-
 // FileUpload is the resource representing a Stripe file upload.
 // For more details see https://stripe.com/docs/api#file_uploads.
 type FileUpload struct {
-	Created int64             `json:"created"`
-	ID      string            `json:"id"`
-	Purpose FileUploadPurpose `json:"purpose"`
-	Size    int64             `json:"size"`
-	Type    string            `json:"type"`
-	URL     string            `json:"url"`
+	Created int64  `json:"created"`
+	ID      string `json:"id"`
+	Purpose string `json:"purpose"`
+	Size    int64  `json:"size"`
+	Type    string `json:"type"`
+	URL     string `json:"url"`
 }
 
 // FileUploadList is a list of file uploads as retrieved from a list endpoint.

@@ -2,27 +2,22 @@ package stripe
 
 import "encoding/json"
 
-// Reason describes the reason why the review is open or closed.
-// Allowed values are "rule", "manual", "approved", "refunded",
-// "refunded_as_fraud", "disputed".
-type ReasonType string
-
 const (
-	ReasonApproved        ReasonType = "approved"
-	ReasonDisputed        ReasonType = "disputed"
-	ReasonManual          ReasonType = "manual"
-	ReasonRefunded        ReasonType = "refunded"
-	ReasonRefundedAsFraud ReasonType = "refunded_as_fraud"
-	ReasonRule            ReasonType = "rule"
+	ReviewReasonApproved        string = "approved"
+	ReviewReasonDisputed        string = "disputed"
+	ReviewReasonManual          string = "manual"
+	ReviewReasonRefunded        string = "refunded"
+	ReviewReasonRefundedAsFraud string = "refunded_as_fraud"
+	ReviewReasonRule            string = "rule"
 )
 
 type Review struct {
-	Charge   *Charge    `json:"charge"`
-	Created  int64      `json:"created"`
-	ID       string     `json:"id"`
-	Livemode bool       `json:"livemode"`
-	Open     bool       `json:"open"`
-	Reason   ReasonType `json:"reason"`
+	Charge   *Charge `json:"charge"`
+	Created  int64   `json:"created"`
+	ID       string  `json:"id"`
+	Livemode bool    `json:"livemode"`
+	Open     bool    `json:"open"`
+	Reason   string  `json:"reason"`
 }
 
 func (r *Review) UnmarshalJSON(data []byte) error {

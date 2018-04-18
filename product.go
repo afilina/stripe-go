@@ -2,17 +2,9 @@ package stripe
 
 import "encoding/json"
 
-// ProductType is the type of a product.
-type ProductType string
-
 const (
-	// ProductTypeGood is a constant that indicates a product represents a physical good,
-	// which may be sold through the Stripe Relay API.
-	ProductTypeGood ProductType = "good"
-
-	// ProductTypeService is a constant that indicates a product represents a service
-	// which is provided on a recurring basis and is priced with a Stripe plan.
-	ProductTypeService ProductType = "service"
+	ProductTypeGood    string = "good"
+	ProductTypeService string = "service"
 )
 
 // PackageDimensions represents the dimension of a product or a sku from the
@@ -72,7 +64,7 @@ type Product struct {
 	Shippable           bool               `json:"shippable"`
 	Skus                *SKUList           `json:"skus"`
 	StatementDescriptor string             `json:"statement_descriptor"`
-	Type                ProductType        `json:"type"`
+	Type                string             `json:"type"`
 	URL                 string             `json:"url"`
 	Updated             int64              `json:"updated"`
 }

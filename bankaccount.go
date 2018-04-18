@@ -8,13 +8,15 @@ import (
 )
 
 const (
-	AccountHolderTypeCompany    string = "company"
-	AccountHolderTypeIndividual string = "individual"
-)
+	BankAccountAccountHolderTypeCompany    string = "company"
+	BankAccountAccountHolderTypeIndividual string = "individual"
 
-// BankAccountStatus is the list of allowed values for the bank account's status.
-// Allowed values are "new", "validated", "verified", "verification_failed", "errored".
-type BankAccountStatus string
+	BankAccountStatusErrored            string = "errored"
+	BankAccountStatusNew                string = "new"
+	BankAccountStatusValidated          string = "validated"
+	BankAccountStatusVerificationFailed string = "verification_failed"
+	BankAccountStatusVerified           string = "verified"
+)
 
 // BankAccountParams is the set of parameters that can be used when updating a
 // bank account.
@@ -130,7 +132,7 @@ type BankAccount struct {
 	Last4              string            `json:"last4"`
 	Metadata           map[string]string `json:"metadata"`
 	RoutingNumber      string            `json:"routing_number"`
-	Status             BankAccountStatus `json:"status"`
+	Status             string            `json:"status"`
 }
 
 // BankAccountList is a list object for bank accounts.

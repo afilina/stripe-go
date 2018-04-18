@@ -2,41 +2,35 @@ package stripe
 
 import "encoding/json"
 
-// ErrorType is the list of allowed values for the error's type.
-type ErrorType string
-
-// ErrorCode is the list of allowed values for the error's code.
-type ErrorCode string
-
 const (
-	ErrorTypeAPI            ErrorType = "api_error"
-	ErrorTypeAPIConnection  ErrorType = "api_connection_error"
-	ErrorTypeAuthentication ErrorType = "authentication_error"
-	ErrorTypeCard           ErrorType = "card_error"
-	ErrorTypeInvalidRequest ErrorType = "invalid_request_error"
-	ErrorTypePermission     ErrorType = "more_permissions_required"
-	ErrorTypeRateLimit      ErrorType = "rate_limit_error"
+	ErrorTypeAPI            string = "api_error"
+	ErrorTypeAPIConnection  string = "api_connection_error"
+	ErrorTypeAuthentication string = "authentication_error"
+	ErrorTypeCard           string = "card_error"
+	ErrorTypeInvalidRequest string = "invalid_request_error"
+	ErrorTypePermission     string = "more_permissions_required"
+	ErrorTypeRateLimit      string = "rate_limit_error"
 
-	ErrorCodeCardDeclined       ErrorCode = "card_declined"
-	ErrorCodeExpiredCard        ErrorCode = "expired_card"
-	ErrorCodeIncorrectCVC       ErrorCode = "incorrect_cvc"
-	ErrorCodeIncorrectZip       ErrorCode = "incorrect_zip"
-	ErrorCodeIncorrectNumber    ErrorCode = "incorrect_number"
-	ErrorCodeInvalidCVC         ErrorCode = "invalid_cvc"
-	ErrorCodeInvalidExpiryMonth ErrorCode = "invalid_expiry_month"
-	ErrorCodeInvalidExpiryYear  ErrorCode = "invalid_expiry_year"
-	ErrorCodeInvalidNumber      ErrorCode = "invalid_number"
-	ErrorCodeInvalidSwipeData   ErrorCode = "invalid_swipe_data"
-	ErrorCodeMissing            ErrorCode = "missing"
-	ErrorCodeProcessingError    ErrorCode = "processing_error"
-	ErrorCodeRateLimit          ErrorCode = "rate_limit"
+	ErrorCodeCardDeclined       string = "card_declined"
+	ErrorCodeExpiredCard        string = "expired_card"
+	ErrorCodeIncorrectCVC       string = "incorrect_cvc"
+	ErrorCodeIncorrectZip       string = "incorrect_zip"
+	ErrorCodeIncorrectNumber    string = "incorrect_number"
+	ErrorCodeInvalidCVC         string = "invalid_cvc"
+	ErrorCodeInvalidExpiryMonth string = "invalid_expiry_month"
+	ErrorCodeInvalidExpiryYear  string = "invalid_expiry_year"
+	ErrorCodeInvalidNumber      string = "invalid_number"
+	ErrorCodeInvalidSwipeData   string = "invalid_swipe_data"
+	ErrorCodeMissing            string = "missing"
+	ErrorCodeProcessingError    string = "processing_error"
+	ErrorCodeRateLimit          string = "rate_limit"
 )
 
 // Error is the response returned when a call is unsuccessful.
 // For more details see  https://stripe.com/docs/api#errors.
 type Error struct {
-	ChargeID string    `json:"charge,omitempty"`
-	Code     ErrorCode `json:"code,omitempty"`
+	ChargeID string `json:"charge,omitempty"`
+	Code     string `json:"code,omitempty"`
 
 	// Err contains an internal error with an additional level of granularity
 	// that can be used in some cases to get more detailed information about
@@ -44,11 +38,11 @@ type Error struct {
 	// exactly what went wrong during a charge.
 	Err error `json:"-"`
 
-	HTTPStatusCode int       `json:"status,omitempty"`
-	Msg            string    `json:"message"`
-	Param          string    `json:"param,omitempty"`
-	RequestID      string    `json:"request_id,omitempty"`
-	Type           ErrorType `json:"type"`
+	HTTPStatusCode int    `json:"status,omitempty"`
+	Msg            string `json:"message"`
+	Param          string `json:"param,omitempty"`
+	RequestID      string `json:"request_id,omitempty"`
+	Type           string `json:"type"`
 }
 
 // Error serializes the error object to JSON and returns it as a string.

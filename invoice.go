@@ -2,13 +2,10 @@ package stripe
 
 import "encoding/json"
 
-// InvoiceLineType is the list of allowed values for the invoice line's type.
-// Allowed values are "invoiceitem", "subscription".
-type InvoiceLineType string
-
-// InvoiceBilling is the type of billing method for this invoice.
-// Currently supported values are "send_invoice" and "charge_automatically".
-type InvoiceBilling string
+const (
+	InvoiceLineTypeTypeInvoiceItem  string = "invoiceitem"
+	InvoiceLineTypeTypeSubscription string = "subscription"
+)
 
 // InvoiceParams is the set of parameters that can be used when creating or updating an invoice.
 // For more details see https://stripe.com/docs/api#create_invoice, https://stripe.com/docs/api#update_invoice.
@@ -69,7 +66,7 @@ type Invoice struct {
 	ApplicationFee      int64             `json:"application_fee"`
 	AttemptCount        int64             `json:"attempt_count"`
 	Attempted           bool              `json:"attempted"`
-	Billing             InvoiceBilling    `json:"billing"`
+	Billing             string            `json:"billing"`
 	Charge              *Charge           `json:"charge"`
 	Closed              bool              `json:"closed"`
 	Currency            Currency          `json:"currency"`
@@ -121,7 +118,7 @@ type InvoiceLine struct {
 	Proration    bool              `json:"proration"`
 	Quantity     int64             `json:"quantity"`
 	Subscription string            `json:"subscription"`
-	Type         InvoiceLineType   `json:"type"`
+	Type         string            `json:"type"`
 }
 
 // Period is a structure representing a start and end dates.

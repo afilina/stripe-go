@@ -2,85 +2,75 @@ package stripe
 
 import "encoding/json"
 
-// RecipientTransferDestinationType consts represent valid recipient_transfer destinations.
-type RecipientTransferDestinationType string
-
-// RecipientTransferFailCode is the list of allowed values for the recipient_transfer's failure code.
-// Allowed values are "insufficient_funds", "account_closed", "no_account",
-// "invalid_account_number", "debit_not_authorized", "bank_ownership_changed",
-// "account_frozen", "could_not_process", "bank_account_restricted", "invalid_currency".
-type RecipientTransferFailCode string
-
-// RecipientTransferSourceType is the list of allowed values for the recipient_transfer's source_type field.
-// Allowed values are "alipay_account", bank_account", "bitcoin_receiver", "card".
-type RecipientTransferSourceType string
-
-// RecipientTransferStatus is the list of allowed values for the recipient_transfer's status.
-// Allowed values are "paid", "pending", "in_transit",  "failed".
-type RecipientTransferStatus string
-
-// RecipientTransferType is the list of allowed values for the recipient_transfer's type.
-// Allowed values are "bank_account" or "card".
-type RecipientTransferType string
-
 const (
-	// RecipientTransferDestinationBankAccount is a constant representing a recipient_transfer destination
-	// which is a bank account.
-	RecipientTransferDestinationBankAccount RecipientTransferDestinationType = "bank_account"
+	RecipientTransferDestinationBankAccount string = "bank_account"
+	RecipientTransferDestinationCard        string = "card"
 
-	// RecipientTransferDestinationCard is a constant representing a recipient_transfer destination
-	// which is a card.
-	RecipientTransferDestinationCard RecipientTransferDestinationType = "card"
-)
+	RecipientTransferFailureCodeAccountClosed         string = "account_closed"
+	RecipientTransferFailureCodeAccountFrozen         string = "account_frozen"
+	RecipientTransferFailureCodeBankAccountRestricted string = "bank_account_restricted"
+	RecipientTransferFailureCodeBankOwnershipChanged  string = "bank_ownership_changed"
+	RecipientTransferFailureCodeDebitNotAuthorized    string = "debit_not_authorized"
+	RecipientTransferFailureCodeCouldNotProcess       string = "could_not_process"
+	RecipientTransferFailureCodeInsufficientFunds     string = "insufficient_funds"
+	RecipientTransferFailureCodeInvalidAccountNumber  string = "invalid_account_number"
+	RecipientTransferFailureCodeInvalidCurrency       string = "invalid_currency"
+	RecipientTransferFailureCodeNoAccount             string = "no_account"
 
-// RecipientTransferMethodType represents the type of recipient_transfer
-type RecipientTransferMethodType string
+	RecipientTransferMethodInstant  string = "instant"
+	RecipientTransferMethodStandard string = "standard"
 
-const (
-	// RecipientTransferMethodInstant is a constant representing an instant recipient_transfer
-	RecipientTransferMethodInstant RecipientTransferMethodType = "instant"
+	RecipientTransferSourceTypeAlipayAccount   string = "alipay_account"
+	RecipientTransferSourceTypeBankAccount     string = "bank_account"
+	RecipientTransferSourceTypeBitcoinReceiver string = "bitcoin_receiver"
+	RecipientTransferSourceTypeCard            string = "card"
 
-	// RecipientTransferMethodStandard is a constant representing a standard recipient_transfer
-	RecipientTransferMethodStandard RecipientTransferMethodType = "standard"
+	RecipientTransferStatusFailed    string = "failed"
+	RecipientTransferStatusInTransit string = "in_transit"
+	RecipientTransferStatusPaid      string = "paid"
+	RecipientTransferStatusPending   string = "pending"
+
+	RecipientTransferTypeBank string = "bank_account"
+	RecipientTransferTypeCard string = "card"
 )
 
 // RecipientTransferDestination describes the destination of a RecipientTransfer.
 // The Type should indicate which object is fleshed out
 // For more details see https://stripe.com/docs/api/go#recipient_transfer_object
 type RecipientTransferDestination struct {
-	BankAccount *BankAccount                     `json:"-"`
-	Card        *Card                            `json:"-"`
-	ID          string                           `json:"id"`
-	Type        RecipientTransferDestinationType `json:"object"`
+	BankAccount *BankAccount `json:"-"`
+	Card        *Card        `json:"-"`
+	ID          string       `json:"id"`
+	Type        string       `json:"object"`
 }
 
 // RecipientTransfer is the resource representing a Stripe recipient_transfer.
 // For more details see https://stripe.com/docs/api#recipient_transfers.
 type RecipientTransfer struct {
-	Amount              int64                        `json:"amount"`
-	AmountReversed      int64                        `json:"amount_reversed"`
-	BalanceTransaction  *BalanceTransaction          `json:"balance_transaction"`
-	BankAccount         *BankAccount                 `json:"bank_account"`
-	Card                *Card                        `json:"card"`
-	Created             int64                        `json:"created"`
-	Currency            Currency                     `json:"currency"`
-	Date                int64                        `json:"date"`
-	Description         string                       `json:"description"`
-	Destination         RecipientTransferDestination `json:"destination"`
-	FailureCode         RecipientTransferFailCode    `json:"failure_code"`
-	FailureMessage      string                       `json:"failure_message"`
-	ID                  string                       `json:"id"`
-	Livemode            bool                         `json:"livemode"`
-	Metadata            map[string]string            `json:"metadata"`
-	Method              RecipientTransferMethodType  `json:"method"`
-	Recipient           *Recipient                   `json:"recipient"`
-	Reversals           *ReversalList                `json:"reversals"`
-	Reversed            bool                         `json:"reversed"`
-	SourceTransaction   *BalanceTransactionSource    `json:"source_transaction"`
-	SourceType          RecipientTransferSourceType  `json:"source_type"`
-	StatementDescriptor string                       `json:"statement_descriptor"`
-	Status              RecipientTransferStatus      `json:"status"`
-	Type                RecipientTransferType        `json:"type"`
+	Amount              int64                     `json:"amount"`
+	AmountReversed      int64                     `json:"amount_reversed"`
+	BalanceTransaction  *BalanceTransaction       `json:"balance_transaction"`
+	BankAccount         *BankAccount              `json:"bank_account"`
+	Card                *Card                     `json:"card"`
+	Created             int64                     `json:"created"`
+	Currency            Currency                  `json:"currency"`
+	Date                int64                     `json:"date"`
+	Description         string                    `json:"description"`
+	Destination         string                    `json:"destination"`
+	FailureCode         string                    `json:"failure_code"`
+	FailureMessage      string                    `json:"failure_message"`
+	ID                  string                    `json:"id"`
+	Livemode            bool                      `json:"livemode"`
+	Metadata            map[string]string         `json:"metadata"`
+	Method              string                    `json:"method"`
+	Recipient           *Recipient                `json:"recipient"`
+	Reversals           *ReversalList             `json:"reversals"`
+	Reversed            bool                      `json:"reversed"`
+	SourceTransaction   *BalanceTransactionSource `json:"source_transaction"`
+	SourceType          string                    `json:"source_type"`
+	StatementDescriptor string                    `json:"statement_descriptor"`
+	Status              string                    `json:"status"`
+	Type                string                    `json:"type"`
 }
 
 // UnmarshalJSON handles deserialization of a RecipientTransfer.
